@@ -2,7 +2,7 @@ node {
 
   stage('Build') {
     checkout scm
-    echo "howdy!"
+    def app = docker.build "twelvelabs/curl:${env.BUILD_TAG}"
   }
 
 }
