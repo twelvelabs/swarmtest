@@ -3,7 +3,7 @@ version: "3"
 services:
 
   app:
-    image: twelvelabs/curl
+    image: "twelvelabs/curl:${DOCKER_IMAGE_TAG}"
     command: curl http://whoami
     deploy:
       mode: replicated
