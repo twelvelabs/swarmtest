@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  app:
+    image: traefik
+    command: --web --docker --docker.swarmmode --docker.domain=docker.localhost --docker.watch
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - services
+    # service deployment
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  services:

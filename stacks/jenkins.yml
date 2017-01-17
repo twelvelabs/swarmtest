@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  app:
+    image: jenkins:2.32.1-alpine
+    volumes:
+      - data:/var/jenkins_home
+    networks:
+      - traefik_services
+    deploy:
+      resources:
+        reservations:
+          cpus: '0.25'
+          memory: 300M
+      labels:
+        - "traefik.port=8080"
+
+networks:
+  traefik_services:
+    external: true
+
+volumes:
+  data:

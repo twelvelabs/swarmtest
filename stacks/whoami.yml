@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  app:
+    image: emilevauge/whoami
+    networks:
+      - traefik_services
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.port=80"
+
+networks:
+  traefik_services:
+    external: true
