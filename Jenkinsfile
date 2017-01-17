@@ -2,7 +2,7 @@ node {
 
   stage('Build') {
     checkout scm
-    sh "docker build -t twelvelabs/curl:0.0.${env.BUILD_NUMBER} ."
+    sh "docker build -t swarmtest:0.0.${env.BUILD_NUMBER} ."
   }
 
   stage('Test') {
@@ -10,13 +10,13 @@ node {
   }
 
   stage('Publish') {
-    sh "docker tag twelvelabs/curl:0.0.${env.BUILD_NUMBER} twelvelabs/curl:latest"
-    //sh "docker push twelvelabs/curl:0.0.${env.BUILD_NUMBER}"
-    //sh "docker push twelvelabs/curl:latest"
+    sh "docker tag swarmtest:0.0.${env.BUILD_NUMBER} twelvelabs/curl:latest"
+    //sh "docker push swarmtest:0.0.${env.BUILD_NUMBER}"
+    //sh "docker push swarmtest:latest"
   }
 
   stage('Deploy') {
-    sh "DOCKER_IMAGE_TAG=0.0.${env.BUILD_NUMBER} docker stack deploy -c docker-compose.yml curl"
+    sh "DOCKER_IMAGE_TAG=0.0.${env.BUILD_NUMBER} docker stack deploy -c docker-compose.yml swarmtest"
   }
 
 }
