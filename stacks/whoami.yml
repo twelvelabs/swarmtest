@@ -10,6 +10,7 @@ services:
       replicas: 1
       labels:
         - "traefik.port=80"
+        - "traefik.frontend.rule=Host:whoami.docker.localhost"
 
 networks:
   traefik_services:
