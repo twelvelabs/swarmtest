@@ -5,6 +5,12 @@ services:
   app:
     image: "twelvelabs/curl:${DOCKER_IMAGE_TAG}"
     command: curl http://whoami
+    networks:
+      - traefik_services
     deploy:
       mode: replicated
       replicas: 2
+
+networks:
+  traefik_services:
+    external: true
