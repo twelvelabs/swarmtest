@@ -3,17 +3,25 @@ version: "3"
 services:
   app:
     image: jenkins:2.32.1-alpine
+    user: root
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/bin/docker
       - data:/var/jenkins_home
     networks:
       - traefik_services
     deploy:
+      mode: replicated
+      replicas: 1
       resources:
         reservations:
           cpus: '0.25'
           memory: 300M
+      placement:
+        constraints: [node.role == manager]
       labels:
         - "traefik.port=8080"
+        - "traefik.frontend.rule=Host:ci.docker.localhost"
 
 networks:
   traefik_services:

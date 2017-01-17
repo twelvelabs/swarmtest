@@ -37,3 +37,13 @@ open http://docker.localhost:8080/
 docker stack deploy -c stacks/visualizer.yml visualizer
 open http://visualizer_app.docker.localhost/
 ```
+
+
+
+```bash
+docker stack deploy -c stacks/jenkins.yml jenkins
+open http://ci.docker.localhost/
+
+docker ps
+docker exec -it CONTAINER_ID cat /var/jenkins_home/secrets/initialAdminPassword
+```
