@@ -3,9 +3,11 @@
 Setup a 3 node docker swarm cluster
 
 ```bash
+# ** NOTE: if you have Docker for Mac installed, you will need to open preferences and uninstall
 # install the pre-release 1.13 docker toolbox
 curl -L -O https://github.com/docker/toolbox/releases/download/v1.13.0-rc7/DockerToolbox-1.13.0-rc7.pkg
 open DockerToolbox-1.13.0-rc7.pkg
+rm DockerToolbox-1.13.0-rc7.pkg
 
 # bootstrap the cluster
 ./script/swarm.sh
